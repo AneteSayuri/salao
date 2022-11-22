@@ -1,90 +1,125 @@
 package teste;
 
+import businessobject.AtendimentosDia;
 import enumeracao.SexoEnum;
 import enumeracao.TipoClienteEnum;
 import modelo.Cliente;
-import repository.ClienteRepository;
+import repository.ClientesRepository;
 
 import java.util.Scanner;
 
-public class TesteDinamicoPetShop {
+public class TesteClientes {
 
-    private static final ClienteRepository clienteRepository = new ClienteRepository();
+    private static final ClientesRepository clienteRepository = new ClientesRepository();
+    private static final AtendimentosDia atendimentosDia = new AtendimentosDia();
+
 
     public static void main(String[] args) {
-        final int SAIR_DO_SISTEMA = 4;
-        int opcaoSelecionada = 0;
-        do{
-            System.out.println("Selecione a op??o desejada:");
-            System.out.println("1 - Cadastrar");
-            System.out.println("2 - Ver cadastrados");
-            System.out.println("3 - Limpar cadastros");
-            System.out.println("4 - Sair");
 
-            Scanner scanner = new Scanner(System.in);
+        int opcaoSelecionada = 0;
+        final int SAIR_DO_SISTEMA = 7;
+        Scanner scanner = new Scanner(System.in);
+
+        //Clientes criados para base inicial do Teste:
+        Cliente cliente1 = new Cliente("Ana", 20, "1111-1111", SexoEnum.MULHER, TipoClienteEnum.REGULAR);
+        Cliente cliente2 = new Cliente("Bia", 30, "1111-1112", SexoEnum.MULHER, TipoClienteEnum.VIP);
+        Cliente cliente3 = new Cliente("Carlos", 40, "1111-1121", SexoEnum.HOMEM, TipoClienteEnum.REGULAR);
+        Cliente cliente4 = new Cliente("Diego", 50, "1111-1211", SexoEnum.HOMEM, TipoClienteEnum.NOVO);
+        Cliente cliente5 = new Cliente("Emilia", 60, "1111-2111", SexoEnum.MULHER, TipoClienteEnum.VIP);
+        clienteRepository.inserirNaLista(cliente1);
+        clienteRepository.inserirNaLista(cliente2);
+        clienteRepository.inserirNaLista(cliente3);
+        clienteRepository.inserirNaLista(cliente4);
+        clienteRepository.inserirNaLista(cliente5);
+
+        System.out.println("_________________________ BEM-VINDO À BASE DE CLIENTES _________________________");
+        System.out.println("    Aqui será possível:");
+        System.out.println("1 - Ver os clientes cadastrados.");
+        System.out.println("2 - Cadastrar um novo cliente.");
+        System.out.println("3 - Excluir um cliente cadastrado.");
+        System.out.println("4 - Adicionar cliente na lista de atendimentos.");
+        System.out.println("5 - Exibir a fila de atendimentos.");
+        System.out.println("6 - Limpar a fila de atendimentos.");
+        System.out.println("7 - Sair");
+
+        do {
+            System.out.println("___________________________________________________________________________");
+            System.out.println("1-Visualizar, 2-Cadastrar, 3-Excluir, 4-Adicionar, 5-Fila, 6-Limpar, 7-Sair");
+            System.out.print("Selecione a opção desejada: ");
             opcaoSelecionada = scanner.nextInt();
 
-            switch (opcaoSelecionada){
+            switch (opcaoSelecionada) {
                 case 1:
-                    cadastra(scanner, clienteRepository);
+                    clienteRepository.imprimirClientesCadastrados();
                     break;
                 case 2:
-                    clienteRepository.imprimeAnimaisCadastrados();
+                    cadastrar(scanner, clienteRepository);
                     break;
                 case 3:
-                    clienteRepository.limpaCadastro();
+                    remover(scanner, clienteRepository);
                     break;
                 case 4:
-                    System.out.println("Saindo do Sistema");
+                    adicionar(scanner, clienteRepository);
+                    break;
+                case 5:
+                    atendimentosDia.mostrarFilaClientes();
+                    break;
+                case 6:
+                    atendimentosDia.limparFilaClientes();
+                    break;
+                case 7:
+                    System.out.println("Saindo do Sistema...");
                     break;
                 default:
-                    System.out.println("Op??o invalida");
+                    System.out.println("Opção invalida. Digite um número de 1 à 7.");
             }
 
-        }while (opcaoSelecionada != SAIR_DO_SISTEMA);
-    }
-    private static void cadastra(Scanner scanner, ClienteRepository clienteRepository) {
-        System.out.println("######## CADASTRO DE C�ES ########");
-        System.out.println("######## Informe seus dados pessoais... ########");
+        } while (opcaoSelecionada != SAIR_DO_SISTEMA);
 
-        System.out.println("Digite seu nome:");
+
+    }
+
+    private static void cadastrar(Scanner scanner, ClientesRepository clienteRepository) {
+        System.out.println("_______________________ CADASTRAR NOVO CLIENTE _______________________");
+        System.out.print("Informe o nome do Cliente: ");
         String nome = scanner.next();
 
-        System.out.println("######## Informe os dados do seus endere�o... ########");
-
-        System.out.println("Digite sua rua:");
-        String rua = scanner.next();
-
-        System.out.println("Digite o numero da sua casa:");
-        String numero = scanner.next();
-
-        System.out.println("Digite o seu cep:");
-        String cep = scanner.next();
-
-        System.out.println("Digite seu bairro:");
-        String bairro = scanner.next();
-
-        System.out.println("Digite seu estado ende mora:");
-        String estado = scanner.next();
-
-        System.out.println("######## Agora � hora de informar os dados do seu C�ozinho... ########");
-
-        System.out.println("Digite o nome do seu C�o:");
-        String nomeCachorro = scanner.next();
-
-        System.out.println("Digite a raca:");
-        String raca = scanner.next();
-
-        System.out.println("Digite a idade:");
+        System.out.print("Digite a idade: ");
         int idade = scanner.nextInt();
 
+        System.out.print("Digite o telefone para contato: ");
+        String telefone = scanner.next();
 
-        Cliente cliente = new Cliente(nome, TipoClienteEnum.REGULAR);
+        System.out.print("Digite se o cliente se identifica como Homem ou Mulher: ");
+        String sexo = scanner.next().toUpperCase();
+        SexoEnum sexoEnum = SexoEnum.valueOf(sexo);
+
+        Cliente cliente = new Cliente(nome, TipoClienteEnum.NOVO);
         cliente.setIdade(idade);
-        cliente.setSexo(SexoEnum.MULHER);
+        cliente.setTelefone(telefone);
+        cliente.setSexo(sexoEnum);
 
+        clienteRepository.inserirNaLista(cliente);
+        System.out.println("Cliente adicionado à base de Clientes:");
+        System.out.println(cliente);
+    }
 
-        clienteRepository.cadastrar(cliente);
-        System.out.println("CADASTRO FINALIZADO COM SUCESSO!! ACESSE A OP��O 2 PARA CONSULTAR");
+    private static void remover(Scanner scanner, ClientesRepository clienteRepository) {
+        System.out.println("Indique um dos Clientes Cadastrados para ser excluído da Base.");
+        clienteRepository.imprimirClientesCadastrados();
+        System.out.print("\nDigite o número do Cliente a ser excluído: ");
+        int indice = scanner.nextInt()-1;
+        clienteRepository.removerClienteCadastrado(indice);
+    }
+
+    private static void adicionar(Scanner scanner, ClientesRepository clienteRepository) {
+        System.out.println("Indique um dos Clientes Cadastrados para ser adicionar à lista de atendimentos do dia.");
+        clienteRepository.imprimirClientesCadastrados();
+        System.out.print("\nDigite o número do Cliente a ser adicionado: ");
+        int indice = scanner.nextInt()-1;
+        Cliente clienteCopia = clienteRepository.getClienteCadastrado(indice);
+        System.out.println("Este Cliente está sendo adicionado à fila de atendimentos:");
+        System.out.println(clienteCopia);
+        atendimentosDia.setFilaClientes(clienteCopia);
     }
 }

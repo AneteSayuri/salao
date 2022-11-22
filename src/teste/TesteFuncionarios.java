@@ -1,41 +1,50 @@
 package teste;
 
-import modelo.Cliente;
+import enumeracao.SexoEnum;
+import enumeracao.TipoFuncionarioEnum;
+import modelo.Funcionario;
+import repository.FuncionariosRepository;
 
-import java.util.*;
-
-public class TesteCollections {
+public class TesteFuncionarios {
 
     public static void main(String[] args) {
-        List<Cliente> listaClientes = new ArrayList<>();
 
-        // metodo add, adiciona cachorro
-        Cliente cliente1 = new Cliente();
-        Cliente cliente2 = new Cliente();
-        Cliente cliente3 = new Cliente();
-        listaClientes.add(cliente1);
-        listaClientes.add(cliente2);
+        FuncionariosRepository funcionariosRepository = new FuncionariosRepository();
 
-        for (Cliente cliente: listaClientes) {
-            System.out.println(cliente);
-        }
+        Funcionario recepcionista = new Funcionario("Ana", TipoFuncionarioEnum.RECEPCIONISTA);
+        recepcionista.setIdade(22);
+        recepcionista.setTelefone("1111-1111");
+        recepcionista.setSexo(SexoEnum.MULHER);
 
-        // metodo size ve a quantide de cachorros inseridos
-        System.out.println(listaClientes.size());
+        Funcionario cabeleireiro1 = new Funcionario("Bia", TipoFuncionarioEnum.CABELEIREIRO);
+        cabeleireiro1.setIdade(32);
+        cabeleireiro1.setTelefone("2222-2222");
+        cabeleireiro1.setSexo(SexoEnum.MULHER);
 
-        // metodo isEmpty ve se a lista esta vazia
-        System.out.println(listaClientes.isEmpty());
+        Funcionario cabeleireiro2 = new Funcionario("Carlos", TipoFuncionarioEnum.CABELEIREIRO);
+        cabeleireiro2.setIdade(31);
+        cabeleireiro2.setTelefone("1111-2222");
+        cabeleireiro2.setSexo(SexoEnum.HOMEM);
 
-        // metodo remove deleta um objeto por seu indice (posicao)
-        listaClientes.remove(5);
-        System.out.println(listaClientes.size());
+        Funcionario barbeiro = new Funcionario("Daniel", TipoFuncionarioEnum.BARBEIRO);
+        barbeiro.setIdade(21);
+        barbeiro.setTelefone("1111-2221");
+        barbeiro.setSexo(SexoEnum.HOMEM);
 
-        // metodo clear limpa a lista
-        listaClientes.clear();
-        System.out.println(listaClientes.size());
+        Funcionario manicure = new Funcionario("Eliana", TipoFuncionarioEnum.MANICURE);
+        manicure.setIdade(39);
+        manicure.setTelefone("1111-2211");
+        manicure.setSexo(SexoEnum.MULHER);
+
+        funcionariosRepository.inserirNaLista(recepcionista);
+        funcionariosRepository.inserirNaLista(cabeleireiro1);
+        funcionariosRepository.inserirNaLista(cabeleireiro2);
+        funcionariosRepository.inserirNaLista(barbeiro);
+        funcionariosRepository.inserirNaLista(manicure);
+
+        funcionariosRepository.imprimirFuncionariosCadastrados();
 
     }
-
 
 }
 

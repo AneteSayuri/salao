@@ -1,18 +1,17 @@
-package br.com.ada.petshop.modelo;
+package modelo;
+
+import enumeracao.SexoEnum;
 
 public class Pessoa {
 
-    private int id;
     private String nome;
-    private String cpf;
-    private String email;
+    private int idade;
+    private String telefone;
+    private SexoEnum sexo;
 
-    // composição, um dono é composto por um endereço
-    private Endereco endereco;
 
-    public Pessoa(String nome, Endereco endereco) {
+    public Pessoa(String nome) {
         this.nome = nome;
-        this.endereco = endereco;
     }
 
     public String getNome() {
@@ -23,48 +22,40 @@ public class Pessoa {
         this.nome = nome;
     }
 
-    public String getCpf() {
-        return cpf;
+    public int getIdade() {
+        return idade;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        if (this.id == 0){
-            this.id = id;
+    public void setIdade(int idade) {
+        if(idade <= 0){
+            System.err.println("A idade precisa ser maior do que zero.");
+        } else {
+            this.idade = idade;
         }
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public SexoEnum getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(SexoEnum sexo) {
+        this.sexo = sexo;
     }
 
     @Override
     public String toString() {
-        return "Pessoa{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", cpf='" + cpf + '\'' +
-                ", email='" + email + '\'' +
-                ", endereco=" + endereco +
-                '}';
+        return "{Nome: '" + nome + '\'' +
+                ", Idade: " + idade +
+                ", Telefone: '" + telefone + '\'' +
+                ", Sexo: " + sexo +
+                "}";
     }
 }

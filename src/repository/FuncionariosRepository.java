@@ -1,39 +1,29 @@
 package repository;
 
 import businessobject.Relatorios;
-import modelo.Cliente;
+import modelo.Funcionario;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClientesRepository {
-    private static List<Cliente> clientesCadastrados = new ArrayList<>();
-//    private static int sequence = 1;
+public class FuncionariosRepository {
+    private static List<Funcionario> funcionariosList = new ArrayList<>();
 
-    public void inserirNaLista(Cliente cliente){
-//        cliente.setId(sequence);
-//        sequence ++;
-            clientesCadastrados.add(cliente);
+    public void inserirNaLista(Funcionario funcionario){
+            funcionariosList.add(funcionario);
     }
 
-    public void imprimirClientesCadastrados(){
-        System.out.println("_____________ CLIENTES CADASTRADOS:_____________");
-        Relatorios<Cliente> relatorio = new Relatorios();
-        relatorio.imprimirLista(clientesCadastrados);
+    public void imprimirFuncionariosCadastrados(){
+        Relatorios<Funcionario> relatorio = new Relatorios();
 
-        if (clientesCadastrados.isEmpty()){
-            System.out.println("_____________ NÃO HÁ CLIENTES CADASTRADOS _____________");
+        System.out.println("______________________ FUNCIONÁRIOS DESTE SALÃO ______________________\n");
+
+        if (funcionariosList.size() > 0) {
+            System.out.println("Este salão possui " + funcionariosList.size() + " funcionários:");
+            relatorio.imprimirLista(funcionariosList);
+        } else if (funcionariosList.isEmpty()){
+            System.out.println("Não há Funcionários cadastrados neste salão.");
         }
     }
-
-    public void removerClienteCadastrado(int indice){
-        clientesCadastrados.remove(indice);
-    }
-
-    public void limparListaCadastrada(){
-        System.out.println("_____________ LIMPANDO A LISTA DE CADASTRO______________");
-        this.clientesCadastrados.clear();
-    }
-
 
 }

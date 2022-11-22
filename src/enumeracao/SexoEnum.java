@@ -1,2 +1,6 @@
-package enumeracao;public enum SexoEnum {
+package enumeracao;
+
+public enum SexoEnum {
+    MULHER,
+    HOMEM
 }

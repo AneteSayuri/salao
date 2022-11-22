@@ -1,40 +1,36 @@
 package repository;
 
+import businessobject.Relatorios;
 import modelo.Cliente;
-import modelo.Pessoa;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClienteRepository{
-    private static List<Cliente> clientesCadastrados = new ArrayList<>();
-    private static int sequence = 1;
+public class ClientesRepository {
+    private static List<Cliente> clientesList = new ArrayList<>();
 
-    public void cadastrar(Cliente pessoa){
-        pessoa.setId(sequence);
-        sequence ++;
-            clientesCadastrados.add(pessoa);
+    public void inserirNaLista(Cliente cliente){
+            clientesList.add(cliente);
     }
-
 
     public void imprimirClientesCadastrados(){
-        System.out.println("_____________ CLIENTES CADASTRADOS:_____________");
-        for (Cliente cliente : clientesCadastrados) {
-                System.out.println(cliente);
-        }
-
-        if (clientesCadastrados.isEmpty()){
-            System.out.println("_____________ZERO CLIENTES CADASTRADOS_____________");
+        System.out.println("________________________ LISTA DE CLIENTES CADASTRADOS ________________________");
+        Relatorios<Cliente> relatorio = new Relatorios();
+        if (clientesList.size() > 0) {
+            System.out.println("Número de Clientes cadastrados: " + clientesList.size());
+            relatorio.imprimirLista(clientesList);
+        } else if (clientesList.isEmpty()){
+            System.out.println("A lista de Clientes cadastrados está vazia.");
         }
     }
-    // metodo remove deleta um objeto por seu indice (posicao)
-     //   listaFuncionarios.remove(5);
-       // System.out.println(listaFuncionarios.size());
 
-    public void limpaCadastro(){
-        System.out.println("_____________LIMPANDO O CADASTRO______________");
-        this.clientesCadastrados.clear();
+    public void removerClienteCadastrado(int indice){
+        System.out.println("Removendo o cliente: " + clientesList.get(indice));
+        clientesList.remove(indice);
     }
 
+    public Cliente getClienteCadastrado(int indice){
+      return clientesList.get(indice);
+    }
 
 }

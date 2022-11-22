@@ -1,14 +1,14 @@
 package businessobject;
 
-import br.com.ada.petshop.modelo.Servico;
+import modelo.Servico;
 
 import java.math.BigDecimal;
 
-public class DescontoCredito implements AplicadorDesconto{
+public class DescontoClienteNovo implements DescontoCliente {
     @Override
-    public void aplicaDesconto(Servico servico) {
-        //se for credito, desconto de R$ 1.00
-        BigDecimal valorComDesconto = servico.getValor().subtract(new BigDecimal(1.0));
+    public void aplicarDesconto(Servico servico) {
+        System.out.println("Cliente Novo tem 10% de desconto!");
+        BigDecimal valorComDesconto = servico.getValor().multiply(new BigDecimal(0.90));
         servico.setValor(valorComDesconto);
     }
 }

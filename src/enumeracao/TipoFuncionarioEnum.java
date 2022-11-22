@@ -1,9 +1,10 @@
 package enumeracao;
 
-public enum TipoAnimalEnum {
+public enum TipoFuncionarioEnum {
 
-    GATO,
-    CACHORRO,
+    CABELEIREIRO,
+    BARBEIRO,
+    MANICURE,
+    RECEPCIONISTA
 
-    PASSARO;
 }

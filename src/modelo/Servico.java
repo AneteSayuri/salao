@@ -1,22 +1,13 @@
-package br.com.ada.petshop.modelo;
+package modelo;
 
-import br.com.ada.petshop.enumeracao.TipoServicoEnum;
+import enumeracao.TipoServicoEnum;
 
 import java.math.BigDecimal;
 
 public class Servico {
 
-    private BigDecimal valor;
-
     private TipoServicoEnum tipoServico;
-
-    public BigDecimal getValor() {
-        return valor;
-    }
-
-    public void setValor(BigDecimal valor) {
-        this.valor = valor;
-    }
+    private BigDecimal valor;
 
     public TipoServicoEnum getTipoServico() {
         return tipoServico;
@@ -25,4 +16,18 @@ public class Servico {
     public void setTipoServico(TipoServicoEnum tipoServico) {
         this.tipoServico = tipoServico;
     }
+
+    public BigDecimal getValor() {
+        return valor;
+    }
+
+    public void setValor(BigDecimal valor) {
+            this.valor = valor;
+    }
+
+    @Override
+    public String toString() {
+        return tipoServico + ": R$ " + valor;
+    }
 }
+

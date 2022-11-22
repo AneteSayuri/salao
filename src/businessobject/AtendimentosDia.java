@@ -1,30 +1,36 @@
 package businessobject;
 
-import br.com.ada.petshop.modelo.Internavel;
+import modelo.Cliente;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
-// TODO permitir cadastro de outros animais, como Gato, para isso poder ser usado o polimorfismo com a classe Animal
-public class Internacoes {
+public class AtendimentosDia {
 
-    private final int NUMERO_MAXIMO_VAGAS = 6;
+    private final int NUMERO_MAXIMO_ATENDIMENTOS = 3;
+    private int posicoesDisponiveis;
+    private static List<Cliente> filaClientes = new ArrayList<>();
 
-    private Set<Internavel> animaisInternados = new HashSet<>();
-
-    public void internar(Internavel internavel){
-        if (animaisInternados.size() < NUMERO_MAXIMO_VAGAS) {
-            animaisInternados.add(internavel);
+    public void setFilaClientes(Cliente cliente){
+        if (filaClientes.size() < NUMERO_MAXIMO_ATENDIMENTOS) {
+            filaClientes.add(cliente);
         } else{
-            System.err.println("N�o h� vagas");
+            System.out.println("Não há mais vagas para atendimento hoje. Favor remarcar amanhã.");
         }
     }
 
-    public void mostraCachorrosInternados(){
-        System.out.println("-----------------DOGUINHOS DOENTES--------------------");
-        for (Internavel internavel: animaisInternados) {
-            System.out.println(internavel);
-        }
+    public void mostrarFilaClientes(){
+        System.out.println("______________________ CLIENTES A SEREM ATENDIDOS HOJE ______________________");
+        posicoesDisponiveis = NUMERO_MAXIMO_ATENDIMENTOS - filaClientes.size();
+        System.out.println("Há " + posicoesDisponiveis + " posições ainda disponíveis para atendimento.");
+        Relatorios<Cliente> relatorio = new Relatorios();
+        relatorio.imprimirLista(filaClientes);
+
     }
+    public void limparFilaClientes(){
+        System.out.println("_______________________ LIMPANDO A FILA DE ATENDIMENTO DE HOJE _______________________");
+        filaClientes.clear();
+    }
+
 
 }

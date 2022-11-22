@@ -1,7 +1,9 @@
 package enumeracao;
 
-public enum TipoPagamentoEnum {
+public enum TipoClienteEnum {
 
-    CREDITO,
-    DEBITO;
+    NOVO,
+    REGULAR,
+    VIP
+
 }

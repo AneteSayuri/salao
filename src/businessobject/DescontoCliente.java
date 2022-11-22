@@ -1,8 +1,8 @@
 package businessobject;
 
-import br.com.ada.petshop.modelo.Servico;
+import modelo.Servico;
 
-public interface AplicadorDesconto {
+public interface DescontoCliente {
 
-     void aplicaDesconto(Servico servico);
+     void aplicarDesconto(Servico servico);
 }

@@ -1,7 +1,11 @@
-package br.com.ada.petshop.enumeracao;
+package enumeracao;
 
 public enum TipoServicoEnum {
 
-    BANHO,
-    TOSA
+    CORTE_FEMININO,
+    CORTE_MASCULINO,
+    MANICURE,
+    ESCOVA,
+    BARBA
+
 }

@@ -1,24 +1,17 @@
-package br.com.ada.petshop.businessobject;
+package businessobject;
 
 import java.util.List;
 
 public class Relatorios <T> {
 
-    public void geraRelatorioUnico(T t){
-        System.out.println("####### GERANDO RELATORIO INDIVIDUAL #######");
-        System.out.println(t);
-    }
-
-    public void geraRelatorioEmGrupo(List<T> lista){
-        System.out.println("####### GERANDO RELATORIO EM GRUPO #######");
+    public void imprimirLista(List<T> lista){
+        int count = 1;
         for (T t:lista){
-            System.out.println(t);
+            System.out.println(count +") "+ t);
+            count++;
         }
+
     }
 
-    public static<T> void metodo(T t){
-        System.out.println("Imprimindo do metodo estatico");
-        System.out.println(t);
-    }
 
 }

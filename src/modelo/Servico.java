@@ -9,6 +9,14 @@ public class Servico {
     private TipoServicoEnum tipoServico;
     private BigDecimal valor;
 
+    public Servico() {
+    }
+
+    public Servico(TipoServicoEnum tipoServico, BigDecimal valor) {
+        this.tipoServico = tipoServico;
+        this.valor = valor;
+    }
+
     public TipoServicoEnum getTipoServico() {
         return tipoServico;
     }
@@ -27,7 +35,7 @@ public class Servico {
 
     @Override
     public String toString() {
-        return tipoServico + ": R$ " + valor;
+        return tipoServico + ": R$" + valor;
     }
 }
 

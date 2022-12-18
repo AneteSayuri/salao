@@ -5,8 +5,6 @@ import enumeracao.TipoServicoEnum;
 import modelo.Servico;
 
 import java.math.BigDecimal;
-import java.text.NumberFormat;
-import java.util.Locale;
 
 public class TesteTabelaServicos {
 

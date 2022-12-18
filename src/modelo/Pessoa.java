@@ -2,12 +2,15 @@ package modelo;
 
 import enumeracao.SexoEnum;
 
+import java.time.LocalDate;
+import java.time.Period;
+
 public class Pessoa {
 
     private String nome;
-    private int idade;
     private String telefone;
     private SexoEnum sexo;
+    private LocalDate dataDeNascimento;
 
 
     public Pessoa(String nome) {
@@ -20,18 +23,6 @@ public class Pessoa {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public int getIdade() {
-        return idade;
-    }
-
-    public void setIdade(int idade) {
-        if(idade <= 0){
-            System.err.println("A idade precisa ser maior do que zero.");
-        } else {
-            this.idade = idade;
-        }
     }
 
     public String getTelefone() {
@@ -50,10 +41,27 @@ public class Pessoa {
         this.sexo = sexo;
     }
 
+    public LocalDate getDataDeNascimento() {
+        return dataDeNascimento;
+    }
+
+    public void setDataDeNascimento(LocalDate dataDeNascimento) {
+        if (dataDeNascimento.isAfter(LocalDate.now())) {
+            System.err.println("A data de nascimento precisa ser anterior a data de hoje.");
+        } else {
+            this.dataDeNascimento = dataDeNascimento;
+        }
+    }
+
+    public int getIdade() {
+        return Period.between(dataDeNascimento, LocalDate.now()).getYears();
+    }
+
+
     @Override
     public String toString() {
         return "{Nome: '" + nome + '\'' +
-                ", Idade: " + idade +
+                ", Idade: " + getIdade() +
                 ", Telefone: '" + telefone + '\'' +
                 ", Sexo: " + sexo +
                 "}";

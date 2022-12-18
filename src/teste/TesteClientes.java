@@ -6,6 +6,8 @@ import enumeracao.TipoClienteEnum;
 import modelo.Cliente;
 import repository.ClientesRepository;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class TesteClientes {
@@ -20,17 +22,7 @@ public class TesteClientes {
         final int SAIR_DO_SISTEMA = 7;
         Scanner scanner = new Scanner(System.in);
 
-        //Clientes criados para base inicial do Teste:
-        Cliente cliente1 = new Cliente("Ana", 20, "1111-1111", SexoEnum.MULHER, TipoClienteEnum.REGULAR);
-        Cliente cliente2 = new Cliente("Bia", 30, "1111-1112", SexoEnum.MULHER, TipoClienteEnum.VIP);
-        Cliente cliente3 = new Cliente("Carlos", 40, "1111-1121", SexoEnum.HOMEM, TipoClienteEnum.REGULAR);
-        Cliente cliente4 = new Cliente("Diego", 50, "1111-1211", SexoEnum.HOMEM, TipoClienteEnum.NOVO);
-        Cliente cliente5 = new Cliente("Emilia", 60, "1111-2111", SexoEnum.MULHER, TipoClienteEnum.VIP);
-        clienteRepository.inserirNaLista(cliente1);
-        clienteRepository.inserirNaLista(cliente2);
-        clienteRepository.inserirNaLista(cliente3);
-        clienteRepository.inserirNaLista(cliente4);
-        clienteRepository.inserirNaLista(cliente5);
+        clienteRepository.lerClientesResource();
 
         System.out.println("_________________________ BEM-VINDO À BASE DE CLIENTES _________________________");
         System.out.println("    Aqui será possível:");
@@ -81,23 +73,26 @@ public class TesteClientes {
 
     private static void cadastrar(Scanner scanner, ClientesRepository clienteRepository) {
         System.out.println("_______________________ CADASTRAR NOVO CLIENTE _______________________");
+        scanner.nextLine();
         System.out.print("Informe o nome do Cliente: ");
-        String nome = scanner.next();
+        String nome = scanner.nextLine();
 
-        System.out.print("Digite a idade: ");
-        int idade = scanner.nextInt();
+        System.out.print("Digite a Data de Nascimento (dd/mm/aaaa): ");
+        String strData = scanner.nextLine();
+        DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate data = LocalDate.parse(strData, formatoData);
 
         System.out.print("Digite o telefone para contato: ");
-        String telefone = scanner.next();
+        String telefone = scanner.nextLine();
 
         System.out.print("Digite se o cliente se identifica como Homem ou Mulher: ");
         String sexo = scanner.next().toUpperCase();
         SexoEnum sexoEnum = SexoEnum.valueOf(sexo);
 
         Cliente cliente = new Cliente(nome, TipoClienteEnum.NOVO);
-        cliente.setIdade(idade);
         cliente.setTelefone(telefone);
         cliente.setSexo(sexoEnum);
+        cliente.setDataDeNascimento(data);
 
         clienteRepository.inserirNaLista(cliente);
         System.out.println("Cliente adicionado à base de Clientes:");
@@ -105,18 +100,18 @@ public class TesteClientes {
     }
 
     private static void remover(Scanner scanner, ClientesRepository clienteRepository) {
-        System.out.println("Indique um dos Clientes Cadastrados para ser excluído da Base.");
+        System.out.println("\nIndique um dos Clientes Cadastrados para ser Excluído da Base.");
         clienteRepository.imprimirClientesCadastrados();
         System.out.print("\nDigite o número do Cliente a ser excluído: ");
-        int indice = scanner.nextInt()-1;
+        int indice = scanner.nextInt() - 1;
         clienteRepository.removerClienteCadastrado(indice);
     }
 
     private static void adicionar(Scanner scanner, ClientesRepository clienteRepository) {
-        System.out.println("Indique um dos Clientes Cadastrados para ser adicionar à lista de atendimentos do dia.");
+        System.out.println("\nIndique um dos Clientes Cadastrados para ser Adicionado à lista de atendimentos do dia.");
         clienteRepository.imprimirClientesCadastrados();
-        System.out.print("\nDigite o número do Cliente a ser adicionado: ");
-        int indice = scanner.nextInt()-1;
+        System.out.print("\nDigite o número do Cliente a ser Adicionado: ");
+        int indice = scanner.nextInt() - 1;
         Cliente clienteCopia = clienteRepository.getClienteCadastrado(indice);
         System.out.println("Este Cliente está sendo adicionado à fila de atendimentos:");
         System.out.println(clienteCopia);

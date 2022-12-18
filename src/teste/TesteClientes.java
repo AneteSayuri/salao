@@ -19,24 +19,26 @@ public class TesteClientes {
     public static void main(String[] args) {
 
         int opcaoSelecionada = 0;
-        final int SAIR_DO_SISTEMA = 7;
+        final int SAIR_DO_SISTEMA = 8;
         Scanner scanner = new Scanner(System.in);
 
         clienteRepository.lerClientesResource();
 
-        System.out.println("_________________________ BEM-VINDO À BASE DE CLIENTES _________________________");
+        System.out.println("\n_________________________ BEM-VINDO À BASE DE CLIENTES _________________________");
         System.out.println("    Aqui será possível:");
         System.out.println("1 - Ver os clientes cadastrados.");
         System.out.println("2 - Cadastrar um novo cliente.");
         System.out.println("3 - Excluir um cliente cadastrado.");
-        System.out.println("4 - Adicionar cliente na lista de atendimentos.");
-        System.out.println("5 - Exibir a fila de atendimentos.");
-        System.out.println("6 - Limpar a fila de atendimentos.");
-        System.out.println("7 - Sair");
+//        System.out.println("4 - Adicionar cliente na lista de atendimentos.");
+//        System.out.println("5 - Exibir a fila de atendimentos.");
+//        System.out.println("6 - Limpar a fila de atendimentos.");
+        System.out.println("7 - Gravar a base de clientes Atualizada.");
+        System.out.println("8 - Sair");
 
         do {
             System.out.println("___________________________________________________________________________");
-            System.out.println("1-Visualizar, 2-Cadastrar, 3-Excluir, 4-Adicionar, 5-Fila, 6-Limpar, 7-Sair");
+            System.out.println("1-Visualizar | 2-Cadastrar | 3-Excluir | 7-Salvar Base | 8-Sair");
+//            System.out.println("4-Adicionar   |  5-Fila      | 6-Limpar");
             System.out.print("Selecione a opção desejada: ");
             opcaoSelecionada = scanner.nextInt();
 
@@ -60,10 +62,13 @@ public class TesteClientes {
                     atendimentosDia.limparFilaClientes();
                     break;
                 case 7:
+                    clienteRepository.salvarBaseAtualizada();
+                    break;
+                case 8:
                     System.out.println("Saindo do Sistema...");
                     break;
                 default:
-                    System.out.println("Opção invalida. Digite um número de 1 à 7.");
+                    System.out.println("Opção invalida. Digite um número de 1 à 8.");
             }
 
         } while (opcaoSelecionada != SAIR_DO_SISTEMA);
@@ -72,7 +77,7 @@ public class TesteClientes {
     }
 
     private static void cadastrar(Scanner scanner, ClientesRepository clienteRepository) {
-        System.out.println("_______________________ CADASTRAR NOVO CLIENTE _______________________");
+        System.out.println("\n_______________________ CADASTRAR NOVO CLIENTE _______________________");
         scanner.nextLine();
         System.out.print("Informe o nome do Cliente: ");
         String nome = scanner.nextLine();

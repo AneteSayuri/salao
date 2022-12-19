@@ -4,6 +4,7 @@ import businessobject.Relatorios;
 import enumeracao.SexoEnum;
 import enumeracao.TipoFuncionarioEnum;
 import modelo.Funcionario;
+import modelo.FuncionarioBuilder;
 import modelo.Pessoa;
 
 import java.io.BufferedReader;
@@ -36,8 +37,15 @@ public class FuncionariosRepository {
                 LocalDate dataDeNascimento = LocalDate.parse(atributos[3], formatoData);
                 TipoFuncionarioEnum tipoFuncionario = TipoFuncionarioEnum.valueOf(atributos[4]);
 
-                Funcionario funcionario = new Funcionario(nome, telefone, sexo, dataDeNascimento, tipoFuncionario);
-                inserirNaLista(funcionario);
+                Funcionario funcionarioBuilder = new FuncionarioBuilder()
+                        .nome(nome)
+                        .telefone(telefone)
+                        .sexo(sexo)
+                        .dataDeNascimento(dataDeNascimento)
+                        .tipoFuncionario(tipoFuncionario)
+                        .build();
+
+                inserirNaLista(funcionarioBuilder);
 
                 line = br.readLine();
             }

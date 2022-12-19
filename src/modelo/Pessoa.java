@@ -13,6 +13,9 @@ public class Pessoa {
     private LocalDate dataDeNascimento;
 
 
+    public Pessoa() {
+    }
+
     public Pessoa(String nome) {
         this.nome = nome;
     }

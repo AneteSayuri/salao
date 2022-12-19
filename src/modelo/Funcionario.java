@@ -10,11 +10,6 @@ public class Funcionario extends Pessoa implements Serializable {
     private static final long serialVersionUID = 1L;
     private TipoFuncionarioEnum tipoFuncionario;
 
-    public Funcionario(String nome, TipoFuncionarioEnum tipoFuncionario) {
-        super(nome);
-        this.tipoFuncionario = tipoFuncionario;
-    }
-
     public Funcionario(String nome, String telefone, SexoEnum sexo, LocalDate dataDeNascimento, TipoFuncionarioEnum tipoFuncionario) {
         super(nome);
         super.setTelefone(telefone);

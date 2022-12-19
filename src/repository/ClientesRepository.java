@@ -4,6 +4,7 @@ import businessobject.Relatorios;
 import enumeracao.SexoEnum;
 import enumeracao.TipoClienteEnum;
 import modelo.Cliente;
+import modelo.ClienteBuilder;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -56,8 +57,15 @@ public class ClientesRepository {
                 LocalDate dataDeNascimento = LocalDate.parse(atributos[3], formatoData);
                 TipoClienteEnum tipoCliente = TipoClienteEnum.valueOf(atributos[4]);
 
-                Cliente cliente = new Cliente(nome, telefone, sexo, dataDeNascimento, tipoCliente);
-                inserirNaLista(cliente);
+                Cliente clienteBuilder = new ClienteBuilder()
+                        .nome(nome)
+                        .telefone(telefone)
+                        .sexo(sexo)
+                        .dataDeNascimento(dataDeNascimento)
+                        .tipoCliente(tipoCliente)
+                        .build();
+
+                inserirNaLista(clienteBuilder);
 
                 line = br.readLine();
             }

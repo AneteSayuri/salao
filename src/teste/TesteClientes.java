@@ -4,6 +4,7 @@ import businessobject.AtendimentosDia;
 import enumeracao.SexoEnum;
 import enumeracao.TipoClienteEnum;
 import modelo.Cliente;
+import modelo.ClienteBuilder;
 import repository.ClientesRepository;
 
 import java.time.LocalDate;
@@ -94,14 +95,17 @@ public class TesteClientes {
         String sexo = scanner.next().toUpperCase();
         SexoEnum sexoEnum = SexoEnum.valueOf(sexo);
 
-        Cliente cliente = new Cliente(nome, TipoClienteEnum.NOVO);
-        cliente.setTelefone(telefone);
-        cliente.setSexo(sexoEnum);
-        cliente.setDataDeNascimento(data);
+        Cliente clienteBuilder = new ClienteBuilder()
+                .nome(nome)
+                .telefone(telefone)
+                .sexo(sexoEnum)
+                .dataDeNascimento(data)
+                .tipoCliente(TipoClienteEnum.NOVO)
+                .build();
 
-        clienteRepository.inserirNaLista(cliente);
+        clienteRepository.inserirNaLista(clienteBuilder);
         System.out.println("Cliente adicionado à base de Clientes:");
-        System.out.println(cliente);
+        System.out.println(clienteBuilder);
     }
 
     private static void remover(Scanner scanner, ClientesRepository clienteRepository) {
